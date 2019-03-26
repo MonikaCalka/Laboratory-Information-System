@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LaboratoryInformationSystem.IDAO
 {
-    public interface IPatientsDAO
+    public interface IUserDAO
     {
-        List<PatientModel> ReadPatientsList();
-        PatientModel ReadPatientById(long id);
+        List<UserModel> ReadUsersList();
+        UserModel ReadUserById(long id);
     }
 }

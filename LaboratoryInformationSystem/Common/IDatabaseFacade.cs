@@ -11,6 +11,11 @@ namespace LaboratoryInformationSystem.Common
     {
         IPatientsDAO PatientsDAO { get; }
 
+        IDictionaryDAO DictionaryDAO { get; }
+
+        IEmployeesDAO EmployeesDAO { get; }
+
+        IUserDAO UserDAO { get; }
         //tu wszystkie dao
     }
 }

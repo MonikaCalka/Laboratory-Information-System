@@ -9,18 +9,7 @@ namespace LaboratoryInformationSystem.DAO
 {
     public class PatientsDAO : IPatientsDAO
     {
-        public List<PatientModel> ReadPatientsList()
-        {
-            string query = @"
-                select IdPatient, FirstName, Surname, Pesel, Sex, Street, HouseNumber, City, PostalCode, Country, Phone, IdCardNumber, Insurance, 
-                    ContactPersonFirstName, ContactPersonSurname, ContactPersonPesel, ContactPersonPhone 
-                from Patients
-            ";
-
-            return BaseDAO.Select(query, ReadPatientModel);
-        }
-
-        public PatientModel ReadPatientById(int id)
+        public PatientModel ReadPatientById(long id)
         {
             string query = $@"
                 select IdPatient, FirstName, Surname, Pesel, Sex, Street, HouseNumber, City, PostalCode, Country, Phone, IdCardNumber, Insurance, 
@@ -31,6 +20,17 @@ namespace LaboratoryInformationSystem.DAO
             return BaseDAO.SelectFirst(query, ReadPatientModel);
         }
 
+        public List<PatientModel> ReadPatientsList()
+        {
+            string query = @"
+                select IdPatient, FirstName, Surname, Pesel, Sex, Street, HouseNumber, City, PostalCode, Country, Phone, IdCardNumber, Insurance, 
+                    ContactPersonFirstName, ContactPersonSurname, ContactPersonPesel, ContactPersonPhone 
+                from Patients
+            ";
+
+            return BaseDAO.Select(query, ReadPatientModel);
+        }
+        
 
         private PatientModel ReadPatientModel(CustomReader reader)
         {
