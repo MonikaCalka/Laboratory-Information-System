@@ -1,0 +1,756 @@
+/*    ==Scripting Parameters==
+
+    Source Server Version : SQL Server 2016 (13.0.4224)
+    Source Database Engine Edition : Microsoft SQL Server Enterprise Edition
+    Source Database Engine Type : Standalone SQL Server
+
+    Target Server Version : SQL Server 2017
+    Target Database Engine Edition : Microsoft SQL Server Standard Edition
+    Target Database Engine Type : Standalone SQL Server
+*/
+
+USE [master]
+GO
+/****** Object:  Database [LisDB]    Script Date: 05.03.2019 20:35:50 ******/
+CREATE DATABASE [LisDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'LisDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLSERVER\MSSQL\DATA\LisDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'LisDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLSERVER\MSSQL\DATA\LisDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [LisDB] SET COMPATIBILITY_LEVEL = 130
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [LisDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [LisDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [LisDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [LisDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [LisDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [LisDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [LisDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [LisDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [LisDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [LisDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [LisDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [LisDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [LisDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [LisDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [LisDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [LisDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [LisDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [LisDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [LisDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [LisDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [LisDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [LisDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [LisDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [LisDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [LisDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [LisDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [LisDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [LisDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [LisDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [LisDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'LisDB', N'ON'
+GO
+ALTER DATABASE [LisDB] SET QUERY_STORE = OFF
+GO
+USE [LisDB]
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES = PRIMARY;
+GO
+USE [LisDB]
+GO
+/****** Object:  Table [dbo].[Consultants]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Consultants](
+	[IdConsultant] [int] NOT NULL,
+	[IdEmployee] [int] NOT NULL,
+	[IdOrder] [int] NOT NULL,
+ CONSTRAINT [PK_Consultants] PRIMARY KEY CLUSTERED 
+(
+	[IdConsultant] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employees]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employees](
+	[IdEmployee] [int] NOT NULL IDENTITY(1,1),
+	[IdPosition] [int] NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[Surname] [varchar](50) NOT NULL,
+	[Pesel] [varchar](11) NOT NULL,
+	[Sex] [varchar](2) NOT NULL,
+	[Street] [varchar](50) NOT NULL,
+	[HouseNumber] [varchar](15) NOT NULL,
+	[City] [varchar](50) NOT NULL,
+	[PostalCode] [varchar](15) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
+	[Phone] [varchar](9) NOT NULL,
+	[Email] [varchar](100) NULL,
+	[DateOfEmployment] [varchar](50) NOT NULL,
+	[DateOfLaying] [varchar](50) NULL,
+	[LicenseNumber] [varchar](50) NULL,
+	[IdWard] [int] NULL,
+ CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
+(
+	[IdEmployee] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HistoryPersonalData]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HistoryPersonalData](
+	[IdHistoryPersonalData] [int] NOT NULL IDENTITY(1,1),
+	[FirstName] [varchar](50) NULL,
+	[Surname] [varchar](50) NULL,
+	[Pesel] [varchar](11) NULL,
+	[Sex] [varchar](2) NULL,
+	[Street] [varchar](50) NULL,
+	[HouseNumber] [varchar](15) NULL,
+	[City] [varchar](50) NULL,
+	[PostalCode] [varchar](15) NULL,
+	[Country] [varchar](50) NULL,
+	[Phone] [varchar](9) NULL,
+	[IdCardNumber] [varchar](50) NULL,
+	[Insurance] [varchar](50) NULL,
+	[ContactPersonFirstName] [varchar](50) NULL,
+	[ContactPersonSurname] [varchar](50) NULL,
+	[ContactPersonPesel] [varchar](11) NULL,
+	[ContactPersonPhone] [varchar](9) NULL,
+	[Email] [varchar](100) NULL,
+	[LicenseNumber] [varchar](50) NULL,
+	[IdPatient] [int] NULL,
+	[IdEmployee] [int] NULL,
+	[DateOfChange] [varchar](50) NULL,
+	[UserOfChange] [varchar](50) NULL,
+ CONSTRAINT [PK_HistoryPersonalData] PRIMARY KEY CLUSTERED 
+(
+	[IdHistoryPersonalData] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Languages]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Languages](
+	[IdLanguage] [int] NOT NULL,
+	[Code] [varchar](5) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Languages] PRIMARY KEY CLUSTERED 
+(
+	[IdLanguage] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderedTests]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderedTests](
+	[IdOrderedTest] [int] NOT NULL IDENTITY(1,1),
+	[IdStudy] [int] NOT NULL,
+	[IdTest] [int] NOT NULL,
+ CONSTRAINT [PK_OrderedTests] PRIMARY KEY CLUSTERED 
+(
+	[IdOrderedTest] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[IdOrder] [int] NOT NULL IDENTITY(1,1),
+	[IdPatient] [int] NOT NULL,
+	[IdEmployee] [int] NOT NULL,
+	[IdWard] [int] NULL,
+	[Institution] [varchar](100) NULL,
+	[Comment] [varchar](max) NULL,
+	[DateOfOrder] [varchar](50) NOT NULL,
+	[DateOfReceived] [varchar](50) NULL,
+	[IdStatus] [int] NOT NULL,
+	[IdPriority] [int] NOT NULL,
+ CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
+(
+	[IdOrder] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Patients]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Patients](
+	[IdPatient] [int] NOT NULL IDENTITY(1,1),
+	[FirstName] [varchar](50) NOT NULL,
+	[Surname] [varchar](50) NOT NULL,
+	[Pesel] [varchar](11) NOT NULL,
+	[Sex] [varchar](2) NOT NULL,
+	[Street] [varchar](50) NOT NULL,
+	[HouseNumber] [varchar](15) NOT NULL,
+	[City] [varchar](50) NOT NULL,
+	[PostalCode] [varchar](15) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
+	[Phone] [varchar](9) NOT NULL,
+	[IdCardNumber] [varchar](50) NULL,
+	[Insurance] [varchar](50) NULL,
+	[ContactPersonFirstName] [varchar](50) NULL,
+	[ContactPersonSurname] [varchar](50) NULL,
+	[ContactPersonPesel] [varchar](11) NULL,
+	[ContactPersonPhone] [varchar](9) NULL,
+ CONSTRAINT [PK_Patients] PRIMARY KEY CLUSTERED 
+(
+	[IdPatient] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Positions]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Positions](
+	[IdPosition] [int] NOT NULL,
+ CONSTRAINT [PK_Positions] PRIMARY KEY CLUSTERED 
+(
+	[IdPosition] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PositionTranslations]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PositionTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdPosition] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_PositionTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Priotities]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Priotities](
+	[IdPrioroty] [int] NOT NULL,
+ CONSTRAINT [PK_Priotities] PRIMARY KEY CLUSTERED 
+(
+	[IdPrioroty] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PriotityTranslations]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PriotityTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdPriority] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NULL,
+ CONSTRAINT [PK_PriotityTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Profiles]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Profiles](
+	[IdProfile] [int] NOT NULL,
+	[Code] [varchar](10) NOT NULL,
+	[Permament] [bit] NOT NULL,
+ CONSTRAINT [PK_Profiles] PRIMARY KEY CLUSTERED 
+(
+	[IdProfile] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProfileTranslations]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProfileTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdProfile] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_ProfileTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Results]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Results](
+	[IdResult] [int] NOT NULL IDENTITY(1,1),
+	[IdEmployee] [int] NOT NULL,
+	[IdStudy] [int] NOT NULL,
+	[DateOfResult] [varchar](50) NOT NULL,
+	[Description] [varchar](max) NULL,
+	[ReasonForRepeat] [varchar](max) NULL,
+	[Actual] [bit] NOT NULL,
+ CONSTRAINT [PK_Results] PRIMARY KEY CLUSTERED 
+(
+	[IdResult] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ResultUnits]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ResultUnits](
+	[IdResultUnit] [int] NOT NULL IDENTITY(1,1),
+	[IdOrderedTests] [int] NOT NULL,
+	[IdResult] [int] NOT NULL,
+	[Value] [float] NOT NULL,
+ CONSTRAINT [PK_ResultUnits] PRIMARY KEY CLUSTERED 
+(
+	[IdResultUnit] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Samples]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Samples](
+	[IdSample] [int] NOT NULL IDENTITY(1,1),
+	[IdEmployee] [int] NOT NULL,
+	[IdStudy] [int] NOT NULL,
+	[DateOfCollection] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Samples] PRIMARY KEY CLUSTERED 
+(
+	[IdSample] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[IdStatus] [int] NOT NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[IdStatus] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StatusTranslations]    Script Date: 05.03.2019 20:35:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StatusTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdStatus] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_StatusTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Studies]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Studies](
+	[IdStudy] [int] NOT NULL IDENTITY(1,1),
+	[IdProfile] [int] NOT NULL,
+	[IdEmployee] [int] NOT NULL,
+	[IdOrder] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+	[DateOfStudy] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Studies] PRIMARY KEY CLUSTERED 
+(
+	[IdStudy] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tests]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tests](
+	[IdTest] [int] NOT NULL,
+	[IdProfile] [int] NOT NULL,
+	[Code] [varchar](10) NOT NULL,
+	[NormMinM] [float] NOT NULL,
+	[NormMaxM] [float] NOT NULL,
+	[NormMinF] [float] NOT NULL,
+	[NormMaxF] [float] NOT NULL,
+ CONSTRAINT [PK_Tests] PRIMARY KEY CLUSTERED 
+(
+	[IdTest] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TestTranslations]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TestTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdTest] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_TestTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[IdUser] [int] NOT NULL IDENTITY(1,1),
+	[IdEmployee] [int] NOT NULL,
+	[Login] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[DateOfChange] [varchar](50) NOT NULL,
+	[InUse] [bit] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[IdUser] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Verifications]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Verifications](
+	[IdVerification] [int] NOT NULL IDENTITY(1,1),
+	[IdResult] [int] NOT NULL,
+	[IdEmployee] [int] NOT NULL,
+	[DateOfVerification] [varchar](50) NOT NULL,
+	[Description] [varchar](max) NOT NULL,
+ CONSTRAINT [PK_Verifications] PRIMARY KEY CLUSTERED 
+(
+	[IdVerification] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Wards]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Wards](
+	[IdWard] [int] NOT NULL,
+ CONSTRAINT [PK_Wards] PRIMARY KEY CLUSTERED 
+(
+	[IdWard] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[WardTranslations]    Script Date: 05.03.2019 20:35:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WardTranslations](
+	[IdTranslation] [int] NOT NULL IDENTITY(1,1),
+	[IdWard] [int] NOT NULL,
+	[IdLanguage] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_WardTranslations] PRIMARY KEY CLUSTERED 
+(
+	[IdTranslation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Consultants]  WITH CHECK ADD  CONSTRAINT [FK_Consultants_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Consultants] CHECK CONSTRAINT [FK_Consultants_Employees]
+GO
+ALTER TABLE [dbo].[Consultants]  WITH CHECK ADD  CONSTRAINT [FK_Consultants_Orders] FOREIGN KEY([IdOrder])
+REFERENCES [dbo].[Orders] ([IdOrder])
+GO
+ALTER TABLE [dbo].[Consultants] CHECK CONSTRAINT [FK_Consultants_Orders]
+GO
+ALTER TABLE [dbo].[Employees]  WITH CHECK ADD  CONSTRAINT [FK_Employees_Positions] FOREIGN KEY([IdPosition])
+REFERENCES [dbo].[Positions] ([IdPosition])
+GO
+ALTER TABLE [dbo].[Employees] CHECK CONSTRAINT [FK_Employees_Positions]
+GO
+ALTER TABLE [dbo].[Employees]  WITH CHECK ADD  CONSTRAINT [FK_Employees_Wards] FOREIGN KEY([IdWard])
+REFERENCES [dbo].[Wards] ([IdWard])
+GO
+ALTER TABLE [dbo].[Employees] CHECK CONSTRAINT [FK_Employees_Wards]
+GO
+ALTER TABLE [dbo].[HistoryPersonalData]  WITH CHECK ADD  CONSTRAINT [FK_HistoryPersonalData_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[HistoryPersonalData] CHECK CONSTRAINT [FK_HistoryPersonalData_Employees]
+GO
+ALTER TABLE [dbo].[HistoryPersonalData]  WITH CHECK ADD  CONSTRAINT [FK_HistoryPersonalData_Patients] FOREIGN KEY([IdPatient])
+REFERENCES [dbo].[Patients] ([IdPatient])
+GO
+ALTER TABLE [dbo].[HistoryPersonalData] CHECK CONSTRAINT [FK_HistoryPersonalData_Patients]
+GO
+ALTER TABLE [dbo].[OrderedTests]  WITH CHECK ADD  CONSTRAINT [FK_OrderedTests_Studies] FOREIGN KEY([IdStudy])
+REFERENCES [dbo].[Studies] ([IdStudy])
+GO
+ALTER TABLE [dbo].[OrderedTests] CHECK CONSTRAINT [FK_OrderedTests_Studies]
+GO
+ALTER TABLE [dbo].[OrderedTests]  WITH CHECK ADD  CONSTRAINT [FK_OrderedTests_Tests] FOREIGN KEY([IdTest])
+REFERENCES [dbo].[Tests] ([IdTest])
+GO
+ALTER TABLE [dbo].[OrderedTests] CHECK CONSTRAINT [FK_OrderedTests_Tests]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Employees]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Patients] FOREIGN KEY([IdPatient])
+REFERENCES [dbo].[Patients] ([IdPatient])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Patients]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Priotities] FOREIGN KEY([IdPriority])
+REFERENCES [dbo].[Priotities] ([IdPrioroty])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Priotities]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Status] FOREIGN KEY([IdStatus])
+REFERENCES [dbo].[Status] ([IdStatus])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Status]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Wards] FOREIGN KEY([IdWard])
+REFERENCES [dbo].[Wards] ([IdWard])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Wards]
+GO
+ALTER TABLE [dbo].[PositionTranslations]  WITH CHECK ADD  CONSTRAINT [FK_PositionTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[PositionTranslations] CHECK CONSTRAINT [FK_PositionTranslations_Languages]
+GO
+ALTER TABLE [dbo].[PositionTranslations]  WITH CHECK ADD  CONSTRAINT [FK_PositionTranslations_Positions] FOREIGN KEY([IdPosition])
+REFERENCES [dbo].[Positions] ([IdPosition])
+GO
+ALTER TABLE [dbo].[PositionTranslations] CHECK CONSTRAINT [FK_PositionTranslations_Positions]
+GO
+ALTER TABLE [dbo].[PriotityTranslations]  WITH CHECK ADD  CONSTRAINT [FK_PriotityTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[PriotityTranslations] CHECK CONSTRAINT [FK_PriotityTranslations_Languages]
+GO
+ALTER TABLE [dbo].[PriotityTranslations]  WITH CHECK ADD  CONSTRAINT [FK_PriotityTranslations_Priotities] FOREIGN KEY([IdPriority])
+REFERENCES [dbo].[Priotities] ([IdPrioroty])
+GO
+ALTER TABLE [dbo].[PriotityTranslations] CHECK CONSTRAINT [FK_PriotityTranslations_Priotities]
+GO
+ALTER TABLE [dbo].[ProfileTranslations]  WITH CHECK ADD  CONSTRAINT [FK_ProfileTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[ProfileTranslations] CHECK CONSTRAINT [FK_ProfileTranslations_Languages]
+GO
+ALTER TABLE [dbo].[ProfileTranslations]  WITH CHECK ADD  CONSTRAINT [FK_ProfileTranslations_Profiles] FOREIGN KEY([IdProfile])
+REFERENCES [dbo].[Profiles] ([IdProfile])
+GO
+ALTER TABLE [dbo].[ProfileTranslations] CHECK CONSTRAINT [FK_ProfileTranslations_Profiles]
+GO
+ALTER TABLE [dbo].[Results]  WITH CHECK ADD  CONSTRAINT [FK_Results_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Results] CHECK CONSTRAINT [FK_Results_Employees]
+GO
+ALTER TABLE [dbo].[Results]  WITH CHECK ADD  CONSTRAINT [FK_Results_Studies] FOREIGN KEY([IdStudy])
+REFERENCES [dbo].[Studies] ([IdStudy])
+GO
+ALTER TABLE [dbo].[Results] CHECK CONSTRAINT [FK_Results_Studies]
+GO
+ALTER TABLE [dbo].[ResultUnits]  WITH CHECK ADD  CONSTRAINT [FK_ResultUnits_OrderedTests] FOREIGN KEY([IdOrderedTests])
+REFERENCES [dbo].[OrderedTests] ([IdOrderedTest])
+GO
+ALTER TABLE [dbo].[ResultUnits] CHECK CONSTRAINT [FK_ResultUnits_OrderedTests]
+GO
+ALTER TABLE [dbo].[ResultUnits]  WITH CHECK ADD  CONSTRAINT [FK_ResultUnits_Results] FOREIGN KEY([IdResult])
+REFERENCES [dbo].[Results] ([IdResult])
+GO
+ALTER TABLE [dbo].[ResultUnits] CHECK CONSTRAINT [FK_ResultUnits_Results]
+GO
+ALTER TABLE [dbo].[Samples]  WITH CHECK ADD  CONSTRAINT [FK_Samples_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Samples] CHECK CONSTRAINT [FK_Samples_Employees]
+GO
+ALTER TABLE [dbo].[Samples]  WITH CHECK ADD  CONSTRAINT [FK_Samples_Studies] FOREIGN KEY([IdStudy])
+REFERENCES [dbo].[Studies] ([IdStudy])
+GO
+ALTER TABLE [dbo].[Samples] CHECK CONSTRAINT [FK_Samples_Studies]
+GO
+ALTER TABLE [dbo].[StatusTranslations]  WITH CHECK ADD  CONSTRAINT [FK_StatusTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[StatusTranslations] CHECK CONSTRAINT [FK_StatusTranslations_Languages]
+GO
+ALTER TABLE [dbo].[StatusTranslations]  WITH CHECK ADD  CONSTRAINT [FK_StatusTranslations_Status] FOREIGN KEY([IdStatus])
+REFERENCES [dbo].[Status] ([IdStatus])
+GO
+ALTER TABLE [dbo].[StatusTranslations] CHECK CONSTRAINT [FK_StatusTranslations_Status]
+GO
+ALTER TABLE [dbo].[Studies]  WITH CHECK ADD  CONSTRAINT [FK_Studies_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Studies] CHECK CONSTRAINT [FK_Studies_Employees]
+GO
+ALTER TABLE [dbo].[Studies]  WITH CHECK ADD  CONSTRAINT [FK_Studies_Orders] FOREIGN KEY([IdOrder])
+REFERENCES [dbo].[Orders] ([IdOrder])
+GO
+ALTER TABLE [dbo].[Studies] CHECK CONSTRAINT [FK_Studies_Orders]
+GO
+ALTER TABLE [dbo].[Studies]  WITH CHECK ADD  CONSTRAINT [FK_Studies_Profiles] FOREIGN KEY([IdProfile])
+REFERENCES [dbo].[Profiles] ([IdProfile])
+GO
+ALTER TABLE [dbo].[Studies] CHECK CONSTRAINT [FK_Studies_Profiles]
+GO
+ALTER TABLE [dbo].[Studies]  WITH CHECK ADD  CONSTRAINT [FK_Studies_Status] FOREIGN KEY([IdStatus])
+REFERENCES [dbo].[Status] ([IdStatus])
+GO
+ALTER TABLE [dbo].[Studies] CHECK CONSTRAINT [FK_Studies_Status]
+GO
+ALTER TABLE [dbo].[Tests]  WITH CHECK ADD  CONSTRAINT [FK_Tests_Profiles] FOREIGN KEY([IdProfile])
+REFERENCES [dbo].[Profiles] ([IdProfile])
+GO
+ALTER TABLE [dbo].[Tests] CHECK CONSTRAINT [FK_Tests_Profiles]
+GO
+ALTER TABLE [dbo].[TestTranslations]  WITH CHECK ADD  CONSTRAINT [FK_TestTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[TestTranslations] CHECK CONSTRAINT [FK_TestTranslations_Languages]
+GO
+ALTER TABLE [dbo].[TestTranslations]  WITH CHECK ADD  CONSTRAINT [FK_TestTranslations_Tests] FOREIGN KEY([IdTest])
+REFERENCES [dbo].[Tests] ([IdTest])
+GO
+ALTER TABLE [dbo].[TestTranslations] CHECK CONSTRAINT [FK_TestTranslations_Tests]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_Employees]
+GO
+ALTER TABLE [dbo].[Verifications]  WITH CHECK ADD  CONSTRAINT [FK_Verifications_Employees] FOREIGN KEY([IdEmployee])
+REFERENCES [dbo].[Employees] ([IdEmployee])
+GO
+ALTER TABLE [dbo].[Verifications] CHECK CONSTRAINT [FK_Verifications_Employees]
+GO
+ALTER TABLE [dbo].[Verifications]  WITH CHECK ADD  CONSTRAINT [FK_Verifications_Results] FOREIGN KEY([IdResult])
+REFERENCES [dbo].[Results] ([IdResult])
+GO
+ALTER TABLE [dbo].[Verifications] CHECK CONSTRAINT [FK_Verifications_Results]
+GO
+ALTER TABLE [dbo].[WardTranslations]  WITH CHECK ADD  CONSTRAINT [FK_WardTranslations_Languages] FOREIGN KEY([IdLanguage])
+REFERENCES [dbo].[Languages] ([IdLanguage])
+GO
+ALTER TABLE [dbo].[WardTranslations] CHECK CONSTRAINT [FK_WardTranslations_Languages]
+GO
+ALTER TABLE [dbo].[WardTranslations]  WITH CHECK ADD  CONSTRAINT [FK_WardTranslations_Wards] FOREIGN KEY([IdWard])
+REFERENCES [dbo].[Wards] ([IdWard])
+GO
+ALTER TABLE [dbo].[WardTranslations] CHECK CONSTRAINT [FK_WardTranslations_Wards]
+GO
+USE [master]
+GO
+ALTER DATABASE [LisDB] SET  READ_WRITE 
+GO
