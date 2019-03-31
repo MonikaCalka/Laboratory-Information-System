@@ -33,6 +33,22 @@ namespace LaboratoryInformationSystem.Controllers
 
             List<UserModel> userList = DB.UserDAO.ReadUsersList();
             UserModel user = DB.UserDAO.ReadUserById(2L);
+
+            List<OrderModel> orderList = DB.OrderDAO.ReadOrdersList();
+            OrderModel order = DB.OrderDAO.ReadOrderById(1L);
+
+            List<ProfileModel> profilesList = DB.ProfilesDAO.ReadProfilesList("pl");
+            ProfileModel profile = DB.ProfilesDAO.ReadProfileById(1, "pl");
+
+            List<StudyModel> studiesList = DB.StudiesDAO.ReadStudiesList();
+            StudyModel study = DB.StudiesDAO.ReadStudyById(1L);
+
+            List<SampleModel> samplesList = DB.SamplesDAO.ReadSamplesList();
+            SampleModel sample = DB.SamplesDAO.ReadSampleById(1L);
+
+            List<TestModel> testsList = DB.TestsDAO.ReadTestsList("pl");
+            TestModel test = DB.TestsDAO.ReadTestById(1L, "pl");
+
             return View();
             //return Json(Janeczek, JsonRequestBehavior.AllowGet);
 

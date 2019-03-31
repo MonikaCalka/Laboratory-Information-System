@@ -155,7 +155,12 @@
     <Compile Include="DAO\CustomReader.cs" />
     <Compile Include="DAO\DictionaryDAO.cs" />
     <Compile Include="DAO\EmployeesDAO.cs" />
+    <Compile Include="DAO\OrdersDAO.cs" />
     <Compile Include="DAO\PatientsDAO.cs" />
+    <Compile Include="DAO\ProfilesDAO.cs" />
+    <Compile Include="DAO\SamplesDAO.cs" />
+    <Compile Include="DAO\StudiesDAO.cs" />
+    <Compile Include="DAO\TestsDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Enums\DictionaryTypesEnum.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,12 +169,22 @@
     <Compile Include="IDAO\IDictionaryDAO.cs" />
     <Compile Include="IDAO\IEmployeesDAO.cs" />
     <Compile Include="IDAO\IHistoryPersonalDataDAO.cs" />
+    <Compile Include="IDAO\IOrdersDAO.cs" />
     <Compile Include="IDAO\IPatientsDAO.cs" />
+    <Compile Include="IDAO\IProfilesDAO.cs" />
+    <Compile Include="IDAO\ISamplesDAO.cs" />
+    <Compile Include="IDAO\IStudiesDAO.cs" />
+    <Compile Include="IDAO\ITestsDAO.cs" />
     <Compile Include="IDAO\IUserDAO.cs" />
     <Compile Include="Models\DictionaryModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\HistoryPersonalData.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\ProfileModel.cs" />
+    <Compile Include="Models\SampleModel.cs" />
+    <Compile Include="Models\StudyModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

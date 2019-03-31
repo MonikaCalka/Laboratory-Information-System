@@ -17,6 +17,16 @@ namespace LaboratoryInformationSystem.Common
 
         public IUserDAO UserDAO { get; private set; }
 
+        public IOrdersDAO OrderDAO { get; private set; }
+
+        public IProfilesDAO ProfilesDAO { get; private set; }
+
+        public IStudiesDAO StudiesDAO { get; private set; }
+
+        public ISamplesDAO SamplesDAO { get; private set; }
+
+        public ITestsDAO TestsDAO { get; private set; }
+
         public DatabaseFacade()
         {
             PatientsDAO = new PatientsDAO();
@@ -26,6 +36,16 @@ namespace LaboratoryInformationSystem.Common
             EmployeesDAO = new EmployeesDAO();
 
             UserDAO = new UserDAO();
+
+            OrderDAO = new OrdersDAO();
+
+            ProfilesDAO = new ProfilesDAO();
+
+            StudiesDAO = new StudiesDAO();
+
+            SamplesDAO = new SamplesDAO();
+
+            TestsDAO = new TestsDAO();
         }
     }
 }

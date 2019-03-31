@@ -73,5 +73,18 @@ namespace LaboratoryInformationSystem.DAO
             else
                 return reader.GetBoolean(columnNames[field]);
         }
+
+        public double GetDouble(string field)
+        {
+            return reader.GetDouble(columnNames[field]);
+        }
+
+        public double? GetNullableDouble(string field)
+        {
+            if (reader.IsDBNull(columnNames[field]))
+                return null;
+            else
+                return reader.GetDouble(columnNames[field]);
+        }
     }
 }

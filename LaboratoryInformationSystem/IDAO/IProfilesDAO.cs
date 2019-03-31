@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace LaboratoryInformationSystem.IDAO
 {
-    public interface IEmployeesDAO
+    public interface IProfilesDAO
     {
-        List<EmployeeModel> ReadEmployeesList();
-        EmployeeModel ReadEmployeeById(long id);
-
-        List<EmployeeModel> ReadConsultantsList(long idOrder);
+        List<ProfileModel> ReadProfilesList(string lang);
+        ProfileModel ReadProfileById(long? id, string lang);
     }
 }

@@ -33,7 +33,19 @@ namespace LaboratoryInformationSystem.DAO
             return BaseDAO.Select(query, ReadEmployeeModel);
         }
 
-        
+        public List<EmployeeModel> ReadConsultantsList(long idOrder)
+        {
+            string query = $@"
+                select e.IdEmployee, e.IdPosition, e.FirstName, e.Surname, e.Pesel, e.Sex, e.Street, e.HouseNumber, e.City, e.PostalCode, e.Country, 
+                    e.Phone, e.Email, e.DateOfEmployment, e.DateOfLaying, e.LicenseNumber, e.IdWard
+                from Employees e join Consultants c on e.IdEmployee = c.IdEmployee 
+                where c.IdOrder = {idOrder}
+            ";
+
+            return BaseDAO.Select(query, ReadEmployeeModel);
+        }
+
+
         private EmployeeModel ReadEmployeeModel(CustomReader reader)
         {
             DictionaryDAO dict = new DictionaryDAO();

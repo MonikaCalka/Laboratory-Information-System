@@ -16,6 +16,16 @@ namespace LaboratoryInformationSystem.Common
         IEmployeesDAO EmployeesDAO { get; }
 
         IUserDAO UserDAO { get; }
+
+        IOrdersDAO OrderDAO { get; }
+
+        IProfilesDAO ProfilesDAO { get; }
+
+        IStudiesDAO StudiesDAO { get; }
+
+        ISamplesDAO SamplesDAO { get; }
+
+        ITestsDAO TestsDAO { get; }
         //tu wszystkie dao
     }
 }
