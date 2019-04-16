@@ -32,11 +32,10 @@ namespace LaboratoryInformationSystem.DAO
 
         private UserModel ReadUserModel(CustomReader reader)
         {
-            EmployeesDAO employee = new EmployeesDAO();
             return new UserModel()
             {
                 IdUser = reader.GetLong("IdUser"),
-                Employee = employee.ReadEmployeeById(reader.GetLong("IdEmployee")),
+                IdEmployee = reader.GetLong("IdEmployee"),
                 Login = reader.GetString("Login"),
                 Password = reader.GetString("Password"),
                 DateOfChange = reader.GetDate("DateOfChange"),

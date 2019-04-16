@@ -20,6 +20,17 @@ namespace LaboratoryInformationSystem.DAO
             return BaseDAO.SelectFirst(query, ReadSampleModel);
         }
 
+        public SampleModel ReadSampleByStudyId(long id)
+        {
+            string query = $@"
+                select IdSample, IdEmployee, IdStudy, DateOfCollection, Code
+                from Samples
+                where IdStudy = {id}
+            ";
+
+            return BaseDAO.SelectFirst(query, ReadSampleModel);
+        }
+
         public List<SampleModel> ReadSamplesList()
         {
             string query = @"
@@ -30,16 +41,14 @@ namespace LaboratoryInformationSystem.DAO
             return BaseDAO.Select(query, ReadSampleModel);
         }
 
-        private SampleModel ReadSampleModel(CustomReader reader) {
-
-            EmployeesDAO employee = new EmployeesDAO();
-            StudiesDAO study = new StudiesDAO();
+        private SampleModel ReadSampleModel(CustomReader reader)
+        {
 
             return new SampleModel
             {
                 IdSample = reader.GetLong("IdSample"),
-                Employee = employee.ReadEmployeeById(reader.GetLong("IdEmployee")),
-                Study = study.ReadStudyById(reader.GetLong("IdStudy")),
+                IdEmployee = reader.GetLong("IdEmployee"),
+                IdStudy = reader.GetLong("IdStudy"),
                 DateOfCollecion = reader.GetDate("DateOfCollection"),
                 Code = reader.GetString("Code")
             };

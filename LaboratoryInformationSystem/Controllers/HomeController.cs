@@ -48,6 +48,17 @@ namespace LaboratoryInformationSystem.Controllers
 
             List<TestModel> testsList = DB.TestsDAO.ReadTestsList("pl");
             TestModel test = DB.TestsDAO.ReadTestById(1L, "pl");
+            
+            List<VerificationModel> verifList = DB.VerificationsDAO.ReadVerificationsList();
+            VerificationModel verificationModel = DB.VerificationsDAO.ReadVerificationById(1L);
+            VerificationModel verification2Model = DB.VerificationsDAO.ReadVerificationByResultId(1L);
+
+            List<ResultModel> resList = DB.ResultsDAO.ReadResultsList();
+            ResultModel resModel = DB.ResultsDAO.ReadResultById(1L);
+
+            List<ResultUnitModel> resUnitList = DB.ResultUnitsDAO.ReadResultUnitsList();
+            ResultUnitModel resUnitModel = DB.ResultUnitsDAO.ReadResultUnitModelById(1L);
+            List<ResultUnitModel> resUnit2Model = DB.ResultUnitsDAO.ReadResultUnitModelByResultId(1L);
 
             return View();
             //return Json(Janeczek, JsonRequestBehavior.AllowGet);

@@ -27,6 +27,12 @@ namespace LaboratoryInformationSystem.Common
 
         public ITestsDAO TestsDAO { get; private set; }
 
+        public IResultUnitsDAO ResultUnitsDAO { get; private set; }
+
+        public IVerificationsDAO VerificationsDAO { get; private set; }
+
+        public IResultsDAO ResultsDAO { get; private set; }       
+
         public DatabaseFacade()
         {
             PatientsDAO = new PatientsDAO();
@@ -46,6 +52,12 @@ namespace LaboratoryInformationSystem.Common
             SamplesDAO = new SamplesDAO();
 
             TestsDAO = new TestsDAO();
+
+            VerificationsDAO = new VerificationsDAO();
+
+            ResultsDAO = new ResultsDAO();
+
+            ResultUnitsDAO = new ResultUnitsDAO();
         }
     }
 }

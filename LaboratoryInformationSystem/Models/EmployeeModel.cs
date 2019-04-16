@@ -10,6 +10,8 @@ namespace LaboratoryInformationSystem.Models
     {
         public long IdEmployee { get; set; }
 
+        public long IdPosition { get; set; }
+
         public DictionaryModel Position { get; set; }
 
         public string FirstName { get; set; }

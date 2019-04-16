@@ -9,6 +9,8 @@ namespace LaboratoryInformationSystem.Models
     {
         public long IdTest { get; set; }
 
+        public long IdProfile { get; set; }
+
         public ProfileModel Profile { get; set; }
 
         public string Code { get; set; }

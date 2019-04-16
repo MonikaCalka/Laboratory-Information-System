@@ -9,6 +9,11 @@ namespace LaboratoryInformationSystem.DAO
 {
     public class PatientsDAO : IPatientsDAO
     {
+        public void CreatePatient(PatientModel patient)
+        {
+            throw new NotImplementedException();
+        }
+
         public PatientModel ReadPatientById(long id)
         {
             string query = $@"

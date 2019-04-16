@@ -9,9 +9,11 @@ namespace LaboratoryInformationSystem.Models
     {
         public long IdSample { get; set; }
 
+        public long IdEmployee { get; set; }
+
         public EmployeeModel Employee { get; set; }
 
-        public StudyModel Study { get; set; }
+        public long IdStudy { get; set; }
 
         public DateTime DateOfCollecion { get; set; }
 

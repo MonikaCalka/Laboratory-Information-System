@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LaboratoryInformationSystem.IDAO
 {
-    public interface ISamplesDAO
+    public interface IResultsDAO
     {
-        List<SampleModel> ReadSamplesList();
-        SampleModel ReadSampleById(long id);
-        SampleModel ReadSampleByStudyId(long id);
+        List<ResultModel> ReadResultsList();
+        ResultModel ReadResultById(long id);
     }
 }

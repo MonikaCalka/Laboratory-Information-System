@@ -11,5 +11,6 @@ namespace LaboratoryInformationSystem.IDAO
     {
         List<StudyModel> ReadStudiesList();
         StudyModel ReadStudyById(long? id);
+        List<StudyModel> ReadStudiesListByOrderId(long? id);
     }
 }

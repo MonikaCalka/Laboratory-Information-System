@@ -26,6 +26,12 @@ namespace LaboratoryInformationSystem.Common
         ISamplesDAO SamplesDAO { get; }
 
         ITestsDAO TestsDAO { get; }
+
+        IResultUnitsDAO ResultUnitsDAO { get; }
+
+        IVerificationsDAO VerificationsDAO { get; }
+
+        IResultsDAO ResultsDAO { get; }
         //tu wszystkie dao
     }
 }

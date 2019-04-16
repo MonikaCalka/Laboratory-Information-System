@@ -11,5 +11,8 @@ namespace LaboratoryInformationSystem.IDAO
     {
         List<TestModel> ReadTestsList(string lang);
         TestModel ReadTestById(long id, string lang);
+
+        List<TestModel> ReadOrderedTestsList(long idStudy, string lang);
+        TestModel ReadOrderedTestById(long idOrderedTest, string lang);
     }
 }

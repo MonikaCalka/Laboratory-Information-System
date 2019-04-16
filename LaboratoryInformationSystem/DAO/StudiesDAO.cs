@@ -31,20 +31,32 @@ namespace LaboratoryInformationSystem.DAO
             return BaseDAO.Select(query, ReadStudyModel);
         }
 
+        public List<StudyModel> ReadStudiesListByOrderId(long? id)
+        {
+            string query = $@"
+                select IdStudy, IdProfile, IdEmployee, IdOrder, IdStatus, DateOfStudy
+                from Studies
+                where IdOrder = {id}
+            ";
+
+            return BaseDAO.Select(query, ReadStudyModel);
+        }
+
         private StudyModel ReadStudyModel(CustomReader reader)
         {
-            DictionaryDAO dict = new DictionaryDAO();
-            EmployeesDAO employee = new EmployeesDAO();
-            ProfilesDAO profile = new ProfilesDAO();
-            OrdersDAO order = new OrdersDAO();
+            IDictionaryDAO dict = new DictionaryDAO();
+            IEmployeesDAO employee = new EmployeesDAO();
+            IProfilesDAO profile = new ProfilesDAO();
+            IOrdersDAO order = new OrdersDAO();
+            ITestsDAO test = new TestsDAO();
 
             return new StudyModel()
             {
                 IdStudy = reader.GetLong("IdStudy"),
-                Profile = profile.ReadProfileById(reader.GetLong("IdProfile"), "pl"),
-                Employee = employee.ReadEmployeeById(reader.GetLong("IdEmployee")),
-                Order = order.ReadOrderById(reader.GetLong("IdOrder")),
-                Status = dict.ReadDictionaryById(DictionaryTypesEnum.Status, reader.GetLong("IdStatus"), "pl"),
+                IdProfile = reader.GetLong("IdProfile"),
+                IdEmployee = reader.GetLong("IdEmployee"),
+                IdOrder = reader.GetLong("IdOrder"),
+                IdStatus = reader.GetLong("IdStatus"),
                 DateOfStudy = reader.GetDate("DateOfStudy")
             };
         }

@@ -5,20 +5,19 @@ using System.Web;
 
 namespace LaboratoryInformationSystem.Models
 {
-    public class UserModel
+    public class VerificationModel
     {
-        public long IdUser { get; set; }
+        public long IdVerification { get; set; }
+
+        public long IdResult { get; set; }
 
         public long IdEmployee { get; set; }
 
         public EmployeeModel Employee { get; set; }
 
-        public string Login { get; set; }
+        public DateTime DateOfVerification { get; set; }
 
-        public string Password { get; set; }
+        public string Description { get; set; }
 
-        public DateTime DateOfChange { get; set; }
-
-        public bool InUse { get; set; }
     }
 }

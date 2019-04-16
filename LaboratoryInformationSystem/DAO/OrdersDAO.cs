@@ -36,23 +36,18 @@ namespace LaboratoryInformationSystem.DAO
 
         private OrderModel ReadOrderModel(CustomReader reader)
         {
-            DictionaryDAO dict = new DictionaryDAO();
-            PatientsDAO patient = new PatientsDAO();
-            EmployeesDAO employee = new EmployeesDAO();
-
             return new OrderModel()
             {
                 IdOrder = reader.GetLong("IdOrder"),
-                Patient = patient.ReadPatientById(reader.GetLong("IdPatient")),
-                Employee = employee.ReadEmployeeById(reader.GetLong("IdEmployee")),
-                Ward = dict.ReadDictionaryById(DictionaryTypesEnum.Ward, reader.GetNullableLong("IdWard"), "pl"),
+                IdPatient = reader.GetLong("IdPatient"),
+                IdEmployee = reader.GetLong("IdEmployee"),
+                IdWard = reader.GetNullableLong("IdWard"),
                 Institution = reader.GetNullableString("Institution"),
                 Comment = reader.GetNullableString("Comment"),
                 DateOfOrder = reader.GetDate("DateOfOrder"),
                 DateOfReceived = reader.GetNullableDate("DateOfReceived"),
-                Status = dict.ReadDictionaryById(DictionaryTypesEnum.Status, reader.GetNullableLong("IdStatus"), "pl"),
-                Priority = dict.ReadDictionaryById(DictionaryTypesEnum.Priorities, reader.GetNullableLong("IdPriority"), "pl"),
-                Consultants = employee.ReadConsultantsList(reader.GetLong("IdOrder"))
+                IdStatus = reader.GetLong("IdStatus"),
+                IdPriority = reader.GetLong("IdPriority")
             };
         }
     }

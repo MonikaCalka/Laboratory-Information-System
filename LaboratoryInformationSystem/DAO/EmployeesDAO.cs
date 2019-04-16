@@ -48,12 +48,12 @@ namespace LaboratoryInformationSystem.DAO
 
         private EmployeeModel ReadEmployeeModel(CustomReader reader)
         {
-            DictionaryDAO dict = new DictionaryDAO();
+            IDictionaryDAO dict = new DictionaryDAO();
 
             return new EmployeeModel()
             {
                 IdEmployee = reader.GetLong("IdEmployee"),
-                Position = dict.ReadDictionaryById(DictionaryTypesEnum.Positions, reader.GetLong("IdPosition"), "pl"),
+                IdPosition = reader.GetLong("IdPosition"),
                 FirstName = reader.GetString("FirstName"),
                 Surname = reader.GetString("Surname"),
                 Pesel = reader.GetString("Pesel"),

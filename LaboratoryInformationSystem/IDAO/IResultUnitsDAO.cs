@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace LaboratoryInformationSystem.IDAO
 {
-    public interface ISamplesDAO
+    public interface IResultUnitsDAO
     {
-        List<SampleModel> ReadSamplesList();
-        SampleModel ReadSampleById(long id);
-        SampleModel ReadSampleByStudyId(long id);
+        List<ResultUnitModel> ReadResultUnitsList();
+        ResultUnitModel ReadResultUnitModelById(long id);
+        List<ResultUnitModel> ReadResultUnitModelByResultId(long id);
     }
 }
